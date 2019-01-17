@@ -69,5 +69,6 @@ class RepositoryTest extends TestCase
         $this->assertTrue(
             Uuid::isValid($repository->put(new Token\Entity('type', 'owner', 'value', $expireAt)))
         );
+        Carbon::setTestNow();
     }
 }
