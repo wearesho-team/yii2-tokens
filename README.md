@@ -25,7 +25,7 @@ $repository = new Token\Repository([
 
 $token = new Token\Entity(
     $type = 'registration',
-    $owner = 'foo@bar.com',
+    $tokenOwner = 'foo@bar.com',
     $value = 'random-token',
     (new \DateTime())->add('PT30M') // expire after 30 minutes
 );
@@ -55,7 +55,7 @@ class Model extends base\Model {
     public $hash;
     
     /** @var string */
-    public $owner; // or `phone`, `email` etc.
+    public $tokenOwner; // or `phone`, `email` etc.
     
     /** @var string */
     public $token;
@@ -73,7 +73,7 @@ class Model extends base\Model {
     public function rules(): array
     {
         return [
-            [['hash', 'owner', 'token',], 'safe',], // to load using $model->load    
+            [['hash', 'tokenOwner', 'token',], 'safe',], // to load using $model->load    
         ];
     }
 }
@@ -89,7 +89,7 @@ $model->validate(); // false
 
 $hash = $repository->put(new Token\Entity(
     'registration',
-    $model->owner,
+    $model->tokenWwner,
     $model->token,
     (new \DateTime)->add(new \DateInterval('PT1M'))
 ));

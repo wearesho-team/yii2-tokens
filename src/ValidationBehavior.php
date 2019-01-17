@@ -26,7 +26,7 @@ class ValidationBehavior extends base\Behavior
      * Owner attribute name to validate
      * @var string
      */
-    public $owner = 'owner';
+    public $tokenOwner = 'tokenOwner';
 
     /**
      * Token attribute name to validate
@@ -78,9 +78,9 @@ class ValidationBehavior extends base\Behavior
             return $event->isValid = false;
         }
 
-        if ($model->{$this->owner} !== $token->getOwner()) {
-            $model->addError($this->owner, \Yii::t('yii', '{attribute} is invalid.', [
-                'attribute' => $this->owner,
+        if ($model->{$this->tokenOwner} !== $token->getOwner()) {
+            $model->addError($this->tokenOwner, \Yii::t('yii', '{attribute} is invalid.', [
+                'attribute' => $this->tokenOwner,
             ]));
             return $event->isValid = false;
         }
