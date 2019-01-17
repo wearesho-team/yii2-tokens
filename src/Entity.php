@@ -10,7 +10,7 @@ class Entity implements EntityInterface
 {
     use EntityTrait;
 
-    public function __construct(string $type, string $owner, \DateTimeInterface $expireAt, string $value)
+    public function __construct(string $type, string $owner, string $value, \DateTimeInterface $expireAt)
     {
         $this->type = $type;
         $this->owner = $owner;
