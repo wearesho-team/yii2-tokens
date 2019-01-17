@@ -29,10 +29,6 @@ class RepositoryTest extends TestCase
 
                 $map = [
                     [
-                        'multi',
-                        null,
-                    ],
-                    [
                         'hset',
                         ["y2rt-{$hash}", 'type'],
                     ],
@@ -44,18 +40,31 @@ class RepositoryTest extends TestCase
                         'hset',
                         ["y2rt-{$hash}", 'value'],
                     ],
-                    [
-                        'expire',
-                        ["y2rt-{$hash}", $expireDiff],
-                    ],
-                    [
-                        'exec',
-                        null
-                    ]
                 ];
-                $stub->expects($this->exactly(6))
+
+                $stub->expects($this->at(0))
                     ->method('__call')
-                    ->will($this->returnValueMap($map));
+                    ->with(
+                        'multi'
+                    )
+                    ->willReturn($this->returnValue(null));
+
+                $stub->expects($this->at(1))
+                    ->method('__call')
+                    ->willReturn(
+                        $this->returnValueMap($map)
+                    );
+
+                $stub->expects($this->at(5))
+                    ->method('__call')
+                    ->with(
+                        $this->equalTo('exec')
+                    )
+                    ->willReturn(
+                        $this->returnValue(
+                            $this->equalTo(["y2rt-{$hash}", $expireDiff])
+                        )
+                    );
 
                 return new Token\Repository([
                     'redis' => $stub
