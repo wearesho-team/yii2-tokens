@@ -34,6 +34,9 @@ class ValidationBehavior extends base\Behavior
      */
     public $token = 'token';
 
+    /** @var string */
+    public $type;
+
     /**
      * @throws base\InvalidConfigException
      */
@@ -50,14 +53,25 @@ class ValidationBehavior extends base\Behavior
         ];
     }
 
+    /**
+     * @param base\ModelEvent $event
+     * @return bool
+     * @throws base\InvalidConfigException
+     */
     public function beforeValidate(base\ModelEvent $event): bool
     {
+        if(!is_string($this->type)) {
+            throw new base\InvalidConfigException(
+                "Type have to specified as string"
+            );
+        }
+
         /** @var base\Model $model */
         $model = $event->sender;
 
         $hash = $model->{$this->hash};
         $token = $this->repository->get($hash ?? "");
-        if (is_null($token)) {
+        if (is_null($token) || $token->getType() !== $this->type) {
             $model->addError($this->hash, \Yii::t('yii', '{attribute} is invalid.', [
                 'attribute' => $this->hash,
             ]));

@@ -2,6 +2,7 @@
 
 namespace Wearesho\Yii2\Token;
 
+use yii\base;
 use yii\redis;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -10,7 +11,7 @@ use Ramsey\Uuid\Uuid;
  * Class Repository
  * @package Wearesho\Yii2\Token
  */
-class Repository
+class Repository extends base\BaseObject
 {
     protected const FIELD_TYPE = 'type';
     protected const FIELD_OWNER = 'owner';
