@@ -16,6 +16,7 @@
   "require": {
     "php": "^7.1",
     "nesbot/carbon": "^1.33",
+    "ramsey/uuid": "^3.6",
     "yiisoft/yii2": "^2.0.15",
     "yiisoft/yii2-redis": "^2.0"
   },
