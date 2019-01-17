@@ -60,7 +60,7 @@ class ValidationBehavior extends base\Behavior
      */
     public function beforeValidate(base\ModelEvent $event): bool
     {
-        if(!is_string($this->type)) {
+        if (!is_string($this->type)) {
             throw new base\InvalidConfigException(
                 "Type have to specified as string"
             );
@@ -78,14 +78,14 @@ class ValidationBehavior extends base\Behavior
             return $event->isValid = false;
         }
 
-        if($model->{$this->owner} !== $token->getOwner()) {
+        if ($model->{$this->owner} !== $token->getOwner()) {
             $model->addError($this->owner, \Yii::t('yii', '{attribute} is invalid.', [
                 'attribute' => $this->owner,
             ]));
             return $event->isValid = false;
         }
 
-        if($model->{$this->token} !== $token->getValue()) {
+        if ($model->{$this->token} !== $token->getValue()) {
             $model->addError($this->token, \Yii::t('yii', '{attribute} is invalid.', [
                 'attribute' => $this->token,
             ]));
