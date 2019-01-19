@@ -3,6 +3,7 @@
 namespace Wearesho\Yii2\Token;
 
 use yii\base;
+use yii\di;
 use yii\redis;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -19,6 +20,15 @@ class Repository extends base\BaseObject
 
     /** @var string|array|redis\Connection */
     public $redis = 'redis';
+
+    /**
+     * @throws base\InvalidConfigException
+     */
+    public function init(): void
+    {
+        parent::init();
+        $this->redis = di\Instance::ensure($this->redis, redis\Connection::class);
+    }
 
     public function put(EntityInterface $token): string
     {
