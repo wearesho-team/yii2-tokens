@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Wearesho\Yii2\Token;
 
 /**
- * Trait EntityTrait
- * @package Wearesho\Yii2\Token
- *
  * @see EntityInterface implementation
  */
 trait EntityTrait

@@ -4,20 +4,19 @@ namespace Wearesho\Yii2\Token\Tests\Mocks;
 
 use Wearesho\Yii2\Token;
 
+use yii\base;
+
 /**
  * Class Model
  * @package Wearesho\Yii2\Token\Tests\Mocks
  */
-class Model extends \yii\base\Model
+class Model extends base\Model
 {
-    /** @var string */
-    public $hash;
+    public ?string $hash = null;
 
-    /** @var string */
-    public $tokenOwner;
+    public ?string $tokenOwner = null;
 
-    /** @var string */
-    public $token;
+    public ?string $token = null;
 
     public function behaviors(): array
     {

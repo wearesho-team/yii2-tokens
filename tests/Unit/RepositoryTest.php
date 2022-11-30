@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Yii2\Token\Tests\Unit;
 
 use Carbon\Carbon;
@@ -9,10 +11,6 @@ use yii\di\Container;
 use Wearesho\Yii2\Token;
 use Ramsey\Uuid\Uuid;
 
-/**
- * Class RepositoryTest
- * @package Wearesho\Yii2\Token\Tests\Unit
- */
 class RepositoryTest extends TestCase
 {
     public function testPut(): void
