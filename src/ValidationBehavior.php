@@ -1,14 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Yii2\Token;
 
 use yii\di;
 use yii\base;
 
-/**
- * Class ValidationBehavior
- * @package Wearesho\Yii2\Token
- */
 class ValidationBehavior extends base\Behavior
 {
     /** @var array|string|Repository */
@@ -18,21 +16,18 @@ class ValidationBehavior extends base\Behavior
 
     /**
      * Hash attribute name to load token
-     * @var string
      */
-    public $hash = 'hash';
+    public string $hash = 'hash';
 
     /**
      * Owner attribute name to validate
-     * @var string
      */
-    public $tokenOwner = 'tokenOwner';
+    public string $tokenOwner = 'tokenOwner';
 
     /**
      * Token attribute name to validate
-     * @var string
      */
-    public $token = 'token';
+    public string $token = 'token';
 
     /** @var string */
     public $type;
@@ -54,8 +49,6 @@ class ValidationBehavior extends base\Behavior
     }
 
     /**
-     * @param base\ModelEvent $event
-     * @return bool
      * @throws base\InvalidConfigException
      */
     public function beforeValidate(base\ModelEvent $event): bool

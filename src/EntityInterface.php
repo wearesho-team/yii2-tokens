@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Wearesho\Yii2\Token;
 
-/**
- * Interface EntityInterface
- * @package Wearesho\Yii2\Token
- */
 interface EntityInterface
 {
     public function getType(): string;

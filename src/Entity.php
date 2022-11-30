@@ -1,11 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Yii2\Token;
 
-/**
- * Class Entity
- * @package Wearesho\Yii2\Token
- */
 class Entity implements EntityInterface
 {
     use EntityTrait;

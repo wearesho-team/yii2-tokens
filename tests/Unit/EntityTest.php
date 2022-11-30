@@ -1,25 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Yii2\Token\Tests\Unit;
 
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Wearesho\Yii2\Token\Entity;
 
-/**
- * Class EntityTest
- * @package Wearesho\Yii2\Token\Tests\Unit
- */
 class EntityTest extends TestCase
 {
     protected const TYPE = 'token';
     protected const OWNER = 'owner';
     protected const EXPIRE = '2020-03-12';
     protected const VALUE = 'value';
-    
-    /** @var Entity */
-    protected $entity;
-    
+
+    protected Entity $entity;
+
     protected function setUp(): void
     {
         $this->entity = new Entity(

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Yii2\Token\Tests\Unit;
 
 use Carbon\Carbon;
@@ -10,10 +12,6 @@ use yii\base;
 use yii\di\Container;
 use yii\redis\Connection;
 
-/**
- * Class ValidationBehaviorTest
- * @package Wearesho\Yii2\Token\Tests\Unit
- */
 class ValidationBehaviorTest extends TestCase
 {
     protected function setUp(): void
@@ -21,7 +19,7 @@ class ValidationBehaviorTest extends TestCase
         Carbon::setTestNow(Carbon::make('2020-01-01'));
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Carbon::setTestNow();
     }
@@ -54,7 +52,6 @@ class ValidationBehaviorTest extends TestCase
     {
         $this->expectException(base\InvalidConfigException::class);
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         $behavior->beforeValidate(new base\ModelEvent());
     }
 
@@ -72,7 +69,7 @@ class ValidationBehaviorTest extends TestCase
 
     public function testFailedHexists(): void
     {
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,
@@ -105,7 +102,7 @@ class ValidationBehaviorTest extends TestCase
 
     public function testSuccessHexistsWithIncorrectType(): void
     {
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,

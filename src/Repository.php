@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wearesho\Yii2\Token;
 
 use yii\base;
@@ -8,10 +10,6 @@ use yii\redis;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
-/**
- * Class Repository
- * @package Wearesho\Yii2\Token
- */
 class Repository extends base\BaseObject
 {
     protected const FIELD_TYPE = 'type';
@@ -33,7 +31,7 @@ class Repository extends base\BaseObject
     public function put(EntityInterface $token): string
     {
         /** @noinspection PhpUnhandledExceptionInspection */
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         $key = $this->getKey($hash);
         $this->redis->multi();
 
