@@ -99,6 +99,9 @@ $model->hash = $hash;
 $model->validate(); // true
 ```
 
+## TODO
+- Fix test to rely on the order in which methods are invoked (Upgrade PHPUnit to 10)
+
 ## Contributors
 - [Alexander Letnikow](mailto:reclamme@gmail.com)
 
