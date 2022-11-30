@@ -2,7 +2,7 @@
 [![PHP Composer](https://github.com/wearesho-team/yii2-tokens/actions/workflows/php.yml/badge.svg?branch=master)](https://github.com/wearesho-team/yii2-tokens/actions/workflows/php.yml)
 [![Latest Stable Version](https://poser.pugx.org/wearesho-team/yii2-tokens/v/stable.png)](https://packagist.org/packages/wearesho-team/yii2-tokens)
 [![Total Downloads](https://poser.pugx.org/wearesho-team/yii2-tokens/downloads.png)](https://packagist.org/packages/wearesho-team/yii2-tokens)
-[![codecov](https://codecov.io/gh/wearesho-team/yii2-tokens/branch/master/graph/badge.svg)](https://codecov.io/gh/wearesho-team/yii2-tokens)
+[![codecov](https://codecov.io/gh/wearesho-team/yii2-tokens/branch/master/graph/badge.svg?token=Rsbqe2LmqZ)](https://codecov.io/gh/wearesho-team/yii2-tokens)
 
 Storing tokens (authorization, registration) in redis database.
 
