@@ -3,7 +3,6 @@
 namespace Wearesho\Yii2\Token\Tests\Mocks;
 
 use Wearesho\Yii2\Token;
-
 use yii\base;
 
 /**
