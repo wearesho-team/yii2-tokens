@@ -8,7 +8,7 @@ Storing tokens (authorization, registration) in redis database.
 
 ## Installation
 ```bash
-composer require wearesho-team/yii2-tokens:^1.0.0
+composer require wearesho-team/yii2-tokens:^1.1.1
 ```
 
 ## Usage

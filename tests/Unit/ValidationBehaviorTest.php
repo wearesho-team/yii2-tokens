@@ -157,7 +157,7 @@ class ValidationBehaviorTest extends TestCase
 
     public function testInvalidTokenOwner(): void
     {
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,
@@ -218,7 +218,7 @@ class ValidationBehaviorTest extends TestCase
 
     public function testInvalidToken(): void
     {
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,
@@ -280,7 +280,7 @@ class ValidationBehaviorTest extends TestCase
 
     public function testSuccessValidation(): void
     {
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,

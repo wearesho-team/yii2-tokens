@@ -18,7 +18,7 @@ class RepositoryTest extends TestCase
         Carbon::setTestNow(Carbon::make('2010-01-01'));
         $expireAt = Carbon::make('2020-01-01');
         $expireDiff = Carbon::getTestNow()->diffInSeconds($expireAt);
-        $hash = Uuid::uuid4();
+        $hash = Uuid::uuid4()->toString();
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,
