@@ -61,7 +61,7 @@ class Repository extends base\BaseObject
         $type = $this->redis->hget($key, static::FIELD_TYPE);
         $owner = $this->redis->hget($key, static::FIELD_OWNER);
         $value = $this->redis->hget($key, static::FIELD_VALUE);
-        $expireAt = Carbon::now()->addSeconds($this->redis->ttl($key));
+        $expireAt = Carbon::now()->addSeconds((int)$this->redis->ttl($key));
 
         return new Entity($type, $owner, $value, $expireAt);
     }
