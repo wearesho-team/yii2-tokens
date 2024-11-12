@@ -17,7 +17,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": "^8.1",
-    "nesbot/carbon": "^2.24 || ^1.22",
+    "nesbot/carbon": "^2.24 || ^3",
     "ramsey/uuid": "^4.7.6",
     "yiisoft/yii2": "^2.0.47",
     "yiisoft/yii2-redis": "^2.0"
