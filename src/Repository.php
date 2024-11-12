@@ -39,7 +39,7 @@ class Repository extends base\BaseObject
         $this->redis->hset($key, static::FIELD_OWNER, $token->getOwner());
         $this->redis->hset($key, static::FIELD_VALUE, $token->getValue());
 
-        $expire = Carbon::now()->diffInSeconds($token->getExpireAt(), absolute: true);
+        $expire = (int)Carbon::now()->diffInSeconds($token->getExpireAt(), absolute: true);
         $this->redis->expire($key, $expire);
 
         $this->redis->exec();
