@@ -17,52 +17,20 @@ class RepositoryTest extends TestCase
     {
         Carbon::setTestNow(Carbon::make('2010-01-01'));
         $expireAt = Carbon::make('2020-01-01');
-        $expireDiff = Carbon::getTestNow()->diffInSeconds($expireAt);
-        $hash = Uuid::uuid4()->toString();
+        $expireDiff = (int)Carbon::getTestNow()->diffInSeconds($expireAt);
+        $calls = [];
         \Yii::$container = new Container();
         \Yii::$container->set(
             Token\Repository::class,
-            function ($container, $params, $config) use ($hash, $expireDiff) {
+            function ($container, $params, $config) use (&$calls) {
                 $stub = $this->createMock(Connection::class);
 
-                $map = [
-                    [
-                        'hset',
-                        ["y2rt-{$hash}", 'type'],
-                    ],
-                    [
-                        'hset',
-                        ["y2rt-{$hash}", 'owner'],
-                    ],
-                    [
-                        'hset',
-                        ["y2rt-{$hash}", 'value'],
-                    ],
-                ];
-
-                $stub->expects($this->at(0))
+                $stub->expects($this->exactly(6))
                     ->method('__call')
-                    ->with(
-                        'multi'
-                    )
-                    ->willReturn($this->returnValue(null));
-
-                $stub->expects($this->at(1))
-                    ->method('__call')
-                    ->willReturn(
-                        $this->returnValueMap($map)
-                    );
-
-                $stub->expects($this->at(5))
-                    ->method('__call')
-                    ->with(
-                        $this->equalTo('exec')
-                    )
-                    ->willReturn(
-                        $this->returnValue(
-                            $this->equalTo(["y2rt-{$hash}", $expireDiff])
-                        )
-                    );
+                    ->willReturnCallback(function (string $name, array $params) use (&$calls) {
+                        $calls[] = [$name, $params];
+                        return null;
+                    });
 
                 return new Token\Repository([
                     'redis' => $stub
@@ -73,8 +41,18 @@ class RepositoryTest extends TestCase
         /** @var Token\Repository $repository */
         $repository = \Yii::$container->get(Token\Repository::class);
 
-        $this->assertTrue(
-            Uuid::isValid($repository->put(new Token\Entity('type', 'owner', 'value', $expireAt)))
+        $hash = $repository->put(new Token\Entity('type', 'owner', 'value', $expireAt));
+        $this->assertTrue(Uuid::isValid($hash));
+        $this->assertEquals(
+            [
+                ['multi', []],
+                ['hset', ["y2rt-{$hash}", 'type', 'type']],
+                ['hset', ["y2rt-{$hash}", 'owner', 'owner']],
+                ['hset', ["y2rt-{$hash}", 'value', 'value']],
+                ['expire', ["y2rt-{$hash}", $expireDiff]],
+                ['exec', []],
+            ],
+            $calls
         );
         Carbon::setTestNow();
     }

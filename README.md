@@ -6,9 +6,11 @@
 
 Storing tokens (authorization, registration) in redis database.
 
+Compatibility: tested on PHP 8.4, PHP 8.5
+
 ## Installation
 ```bash
-composer require wearesho-team/yii2-tokens:^1.1.1
+composer require wearesho-team/yii2-tokens:^1.4
 ```
 
 ## Usage
@@ -31,7 +33,7 @@ $token = new Token\Entity(
     $type = 'registration',
     $tokenOwner = 'foo@bar.com',
     $value = 'random-token',
-    (new \DateTime())->add('PT30M') // expire after 30 minutes
+    (new \DateTime())->add(new \DateInterval('PT30M')) // expire after 30 minutes
 );
 
 $hash = $repository->put($token);
@@ -86,14 +88,14 @@ $repository = new Token\Repository;
 
 $model = new Model;
 $model->hash = 'some-invalid-hash';
-$model->owner = 'foo@bar.com';
+$model->tokenOwner = 'foo@bar.com';
 $model->token = 'some-random-token';
 
 $model->validate(); // false
 
 $hash = $repository->put(new Token\Entity(
     'registration',
-    $model->tokenWwner,
+    $model->tokenOwner,
     $model->token,
     (new \DateTime)->add(new \DateInterval('PT1M'))
 ));
@@ -102,9 +104,6 @@ $model->hash = $hash;
 
 $model->validate(); // true
 ```
-
-## TODO
-- Fix test to rely on the order in which methods are invoked (Upgrade PHPUnit to 10)
 
 ## Contributors
 - [Alexander Letnikow](mailto:reclamme@gmail.com)
