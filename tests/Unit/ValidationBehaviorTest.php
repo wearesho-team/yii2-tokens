@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Wearesho\Yii2\Token\Tests\Unit;
 
 use Carbon\Carbon;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Wearesho\Yii2\Token;
@@ -32,9 +33,7 @@ class ValidationBehaviorTest extends TestCase
         return $behavior;
     }
 
-    /**
-     * @depends testInstance
-     */
+    #[Depends('testInstance')]
     public function testGetEvents(Token\ValidationBehavior $behavior): Token\ValidationBehavior
     {
         $this->assertEquals(
@@ -45,9 +44,7 @@ class ValidationBehaviorTest extends TestCase
         return $behavior;
     }
 
-    /**
-     * @depends testGetEvents
-     */
+    #[Depends('testGetEvents')]
     public function testTypeNotAsString(Token\ValidationBehavior $behavior): void
     {
         $this->expectException(base\InvalidConfigException::class);
@@ -138,7 +135,7 @@ class ValidationBehaviorTest extends TestCase
                 ];
                 $stub->expects($this->exactly(5))
                     ->method('__call')
-                    ->will($this->returnValueMap($map));
+                    ->willReturnMap($map);
 
                 return new Token\Repository([
                     'redis' => $stub
@@ -193,7 +190,7 @@ class ValidationBehaviorTest extends TestCase
                 ];
                 $stub->expects($this->exactly(5))
                     ->method('__call')
-                    ->will($this->returnValueMap($map));
+                    ->willReturnMap($map);
 
                 return new Token\Repository([
                     'redis' => $stub
@@ -254,7 +251,7 @@ class ValidationBehaviorTest extends TestCase
                 ];
                 $stub->expects($this->exactly(5))
                     ->method('__call')
-                    ->will($this->returnValueMap($map));
+                    ->willReturnMap($map);
 
                 return new Token\Repository([
                     'redis' => $stub
@@ -316,7 +313,7 @@ class ValidationBehaviorTest extends TestCase
                 ];
                 $stub->expects($this->exactly(5))
                     ->method('__call')
-                    ->will($this->returnValueMap($map));
+                    ->willReturnMap($map);
 
                 return new Token\Repository([
                     'redis' => $stub
